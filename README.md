@@ -26,6 +26,9 @@ yarn install
 
 ```shell
 yarn cropper --out "<PATH TO OUTPUT>" "<PATH TO SVG DIRECTORY>"
+
+# For example
+yarn cropper --out ./cropped/ ./MaterialDesign-SVG/svg
 ```
 
 ### 4. Crop ALL THE SVG
