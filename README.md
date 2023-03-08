@@ -1,8 +1,8 @@
 # SVG Iconset Cropper
 
-By default, icon sets like Material Design, have variable padding around their icons. This can make it challenging to create pixel perfect designs.
+SVG icon sets, like [Material Design](https://github.com/Templarian/MaterialDesign-SVG), have variable padding around their icons, which can make it challenging to create pixel perfect designs.
 
-This tool will automatically trim the whitespace from around a batch of SVG icons, using the method developed by the awesome [svgcrop.com](https://svgcrop.com/) ([source](https://github.com/sdennett55/svg_crop/)).
+This tool automatically trims the whitespace from around a batch of SVG icons, using the method developed by the awesome [svgcrop.com](https://svgcrop.com/) ([source](https://github.com/sdennett55/svg_crop/)).
 
 ## Usage
 
