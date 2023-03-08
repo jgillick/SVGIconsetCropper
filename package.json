@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "cropper": "yarn build; yarn server-static; node ./dist/index",
-    "server-static": "cp -r ./src/templates ./dist/ && cp -r ./src/static/*.css ./dist/static/"
+    "server-static": "cp -r ./src/templates ./dist/ && cp -r ./src/static/*.css ./dist/static/",
+    "icomoonToGlyphMap": "yarn build; node ./dist/icomoonToGlyphMap.js"
   },
   "author": "Jeremy Gillick",
   "license": "MIT",
