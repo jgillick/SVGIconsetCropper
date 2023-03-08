@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Iconset Cropper Tool</title>
+  <link type="text/stylesheet" rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+
+<h1>Iconset Cropper Tool</h1>
+<p>
+  This tool will read all the SVG files from the input directory, trim the whitespace around them, and then save them to the output directory.
+</p>
+<ul>
+  <li>Input directory: <code>{{inputDirectory}}</code></li>
+  <li>Output directory: <code>{{outputDirectory}}</code></li>
+</ul>
+<p>
+  <form action="/crop" method="post">
+    <button type="submit" name="start" value="1">Start</button>
+  </form>
+</p>
+</body>
+</html>

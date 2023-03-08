@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Iconset Cropper Tool</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+  <script type="text/javascript" src="/static/CroppedSVG.js"></script>
+</head>
+<body>
+
+<h1>Iconset Cropper Tool</h1>
+<h2>{{name}}</h2>
+
+<div class="svgs">
+  <div class="svg-container">
+    {{{svg}}}
+  </div>
+
+  <div class="svg-container svg-crop">
+    {{{svg}}}
+  </div>
+</div>
+
+<form action="/crop" method="post" id="submit-form">
+  <input type="hidden" name="name" value="{{name}}" />
+  <input type="hidden" name="content" id="content-field" value="" />
+</form>
+
+<script type="text/javascript">
+  window.addEventListener("load", (event) => {
+    const svgEl = document.querySelector('.svg-crop svg');
+    const submitForm = document.getElementById('submit-form');
+    const contentField = document.getElementById('content-field');
+
+    try {
+      const cropper = new CroppedSVG(svgEl);
+      contentField.value = cropper.toBase64();
+      submitForm.submit();
+    } catch (error) {
+      alert(error);
+    }
+  });
+</script>
+
+</body>
+</html>
