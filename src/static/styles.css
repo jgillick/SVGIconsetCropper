@@ -21,3 +21,20 @@ body {
   border-radius: 5px;
   margin-bottom: 12px;
 }
+
+svg.calculate_svg {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  height: 100px;
+  max-width: 100%;
+  max-height: none;
+  width: auto;
+  pointer-events: none;
+  outline: 1px solid#000;
+  margin: auto;
+  border: none;
+  border-radius: 0;
+}

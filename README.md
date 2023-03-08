@@ -3,7 +3,6 @@
 By default, icon sets like Material Design, have variable padding around their icons. This can make it challenging to create pixel perfect designs.
 
 This tool will automatically trim the whitespace from around a batch of SVG icons, using the method developed by the awesome [svgcrop.com](https://svgcrop.com/) ([source](https://github.com/sdennett55/svg_crop/)).
-There is also a helper command that will convert those SVG files into a font with an accompanying glyphmap file, using [svgtofont](https://github.com/jaywcjlove/svgtofont/).
 
 ## Usage
 
@@ -35,12 +34,6 @@ Cropping happens in the browser, so open your browser to http://localhost:8080/ 
 
 Now sit back and wait for the cropped SVG icons to fill the output directory.
 
-### 5. (optional) Make an icon font
+## Make an icon font
 
-Now that the SVGs have been generated, you can create an icon font and glyph map file.
-
-```
-yarn font --svg "<PATH TO CROPPED SVG DIRECTORY>" --out "<FONT OUTPUT DIRECTORY>" <FONT NAME>
-```
-
-This is just a wrapper around [svgtofont](https://github.com/jaywcjlove/svgtofont/), so if you need further customization, use that tool directly.
+You can use [icomoon.io](https://icomoon.io/) to make an icon font from all of these SVGs. Follow [these instructions](https://www.reactnative.guide/12-svg-icons-using-react-native-vector-icons/12.1-creating-custom-iconset.html).

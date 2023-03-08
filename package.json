@@ -6,7 +6,6 @@
   "scripts": {
     "build": "tsc",
     "cropper": "yarn build; yarn server-static; node ./dist/index",
-    "font": "yarn build; node ./dist/generateFont.js",
     "server-static": "cp -r ./src/templates ./dist/ && cp -r ./src/static/*.css ./dist/static/"
   },
   "author": "Jeremy Gillick",
@@ -22,7 +21,7 @@
     "colors-cli": "^1.0.31",
     "express": "^4.18.2",
     "handlebars": "^4.7.7",
-    "prettier": "^2.8.4",
-    "svgtofont": "^3.22.0"
+    "open": "^8.4.2",
+    "prettier": "^2.8.4"
   }
 }

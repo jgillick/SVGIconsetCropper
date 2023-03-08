@@ -1,6 +1,7 @@
 import { ArgumentParser } from "argparse";
 import path from "path";
 import { promises as fs } from "fs";
+
 import { runServer } from "./server";
 
 // Force exit

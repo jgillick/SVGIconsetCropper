@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import { promises as fs } from "fs";
 import Handlebars from "handlebars";
+import open from "open";
 
 const STATIC_DIR = path.resolve(path.join(__dirname, "static"));
 
@@ -121,12 +122,12 @@ export const runServer = async ({
     }
 
     // That was the last file
-    if (currentIdx >= svgFiles.length - 1) {
+    if (currentIdx >= svgFiles.length) {
       response.send(doneTemplate({ outputDirectory: outDir }));
 
       console.log("\nGeneration complete!");
       console.log(
-        "If you want to create a font from the SVG files, try the 'yarn font' command:"
+        "If you want to create a font from the SVG files, try the 'yarn font' command.\n"
       );
 
       process.exit(0);
@@ -144,4 +145,5 @@ export const runServer = async ({
   console.log(
     `🚀 Goto http://localhost:${port} to start converting (CTL+C to exit)`
   );
+  open(`http://localhost:${port}`);
 };

@@ -2,6 +2,7 @@
  * Remove the extra whitespace around an SVG.
  * Adapted from: https://github.com/sdennett55/svg_crop
  */
+
 const invisibleElems = [
   "defs",
   "g",
@@ -34,8 +35,14 @@ class CroppedSVG {
     this.render();
   }
 
+  /**
+   * Convert the SVG to Base64 using js-base64
+   * https://github.com/dankogai/js-base64
+   */
   toBase64() {
-    return btoa(this.svg.outerHTML);
+    const content = this.svg.outerHTML;
+    const Base64 = (window as any).Base64;
+    return Base64.encode(content);
   }
 
   removeAttributes() {
@@ -56,15 +63,35 @@ class CroppedSVG {
 
     const result = [svg].reduce(flatten, []).filter((elem: SVGElement) => {
       const parentElement = elem.parentElement as HTMLElement;
+
+      // Invisible elements
+      if (!elem.tagName || invisibleElems.includes(elem.tagName)) {
+        return false;
+      }
+
+      // Get element properties
+      const rect =
+        typeof elem.getBoundingClientRect === "function"
+          ? elem.getBoundingClientRect()
+          : { height: 0, width: 0 };
+      const computedStyle = getComputedStyle(elem);
+
+      // Remove <rect /> that is just taking up space
+      if (
+        elem.tagName === "rect" &&
+        !elem.childNodes.length &&
+        computedStyle.stroke === "none" &&
+        (computedStyle.fill === "none" ||
+          computedStyle.fill === "rgb(255, 255, 255)")
+      ) {
+        return false;
+      }
+
       return (
-        elem.tagName &&
-        !invisibleElems.includes(elem.tagName) &&
-        (elem.getBoundingClientRect().width ||
-          elem.getBoundingClientRect().height) &&
+        (rect.width || rect.height) &&
         !parentElement.hasAttribute("mask") &&
         parentElement.tagName !== "defs" &&
-        (getComputedStyle(elem).stroke !== "none" ||
-          getComputedStyle(elem).fill !== "none")
+        (computedStyle.stroke !== "none" || computedStyle.fill !== "none")
       );
     });
 
@@ -125,14 +152,17 @@ class CroppedSVG {
   }
 
   render() {
-    this.svg.style.position = "fixed";
-    this.svg.style.top = "0px";
-    this.svg.style.left = "0px";
+    // Put the SVG into calculate mode
+    this.svg.classList.add("calculate_svg");
 
     this.removeAttributes();
     this.getCoords();
     this.setNewAttributes();
 
-    this.svg.style.position = "static";
+    // Remove calculate mode
+    this.svg.classList.remove("calculate_svg");
+    if (!this.svg.classList.length) {
+      this.svg.removeAttribute("class");
+    }
   }
 }
