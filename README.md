@@ -8,16 +8,16 @@ This tool automatically trims the whitespace from around a batch of SVG icons, u
 
 ### 1. Get a batch of SVG files
 
-For example, to trim the material design icons, clone their [@mdi/svg](https://github.com/Templarian/MaterialDesign-SVG) repo and you'll find all their SVG icons in the `svg` directory.
+For example, to trim the material design icons, download (or clone) the [icon repo archive](https://github.com/Templarian/MaterialDesign-SVG/archive/refs/tags/v7.1.96.zip) and extract it. Inside you'll find an `svg` directory.
 
 ### 2. Setup the cropper
 
 Clone this repo and install the dependencies:
 
 ```shell
-git clone https://github.com/jgillick/IconsetCropper.git
+git clone https://github.com/jgillick/SVGIconsetCropper.git
 
-cd IconsetCropper
+cd SVGIconsetCropper
 
 yarn install
 ```
