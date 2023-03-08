@@ -75,6 +75,7 @@ export const runServer = async ({
   port: number;
 }) => {
   let currentIdx = 0;
+  let hasStatus = false;
   let svgFiles = await getSvgList(svgDir);
 
   const app = express();
@@ -85,6 +86,23 @@ export const runServer = async ({
   const welcomeTemplate = await template("index");
   const cropTemplate = await template("crop");
   const doneTemplate = await template("done");
+
+  /**
+   * Update the status output line
+   */
+  const printStatusLog = (status: string) => {
+    // Clear existing status
+    if (hasStatus) {
+      process.stdout.moveCursor(0, -1);
+      process.stdout.clearLine(1);
+    }
+    hasStatus = true;
+
+    const iconName = svgFiles[currentIdx];
+    const idx = currentIdx + 1;
+    const message = `(${idx} of ${svgFiles.length}) ${iconName} - ${status}\n`;
+    process.stdout.write(message);
+  };
 
   /**
    * Default welcome endpoint
@@ -116,8 +134,9 @@ export const runServer = async ({
 
     // Save icon content
     if (name && content) {
-      console.log(` + Saving ${name}`);
       const svgContent = Buffer.from(content, "base64").toString("utf8");
+      printStatusLog("Saving");
+      currentIdx++;
       await saveSvg(outDir, name, svgContent);
     }
 
@@ -125,19 +144,14 @@ export const runServer = async ({
     if (currentIdx >= svgFiles.length) {
       response.send(doneTemplate({ outputDirectory: outDir }));
 
-      console.log("\nGeneration complete!");
-      console.log(
-        "If you want to create a font from the SVG files, try the 'yarn font' command.\n"
-      );
-
+      console.log("Generation complete!");
       process.exit(0);
     }
 
     // Crop the next icon
     const iconName = svgFiles[currentIdx];
     const svgContent = await readSvg(svgDir, iconName);
-    console.log(`Cropping ${iconName}`);
-    currentIdx++;
+    printStatusLog("Cropping");
     return response.send(cropTemplate({ name: iconName, svg: svgContent }));
   });
 
