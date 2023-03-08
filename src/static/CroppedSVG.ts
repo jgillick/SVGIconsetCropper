@@ -82,8 +82,14 @@ class CroppedSVG {
         !elem.childNodes.length &&
         computedStyle.stroke === "none" &&
         (computedStyle.fill === "none" ||
-          computedStyle.fill === "rgb(255, 255, 255)")
+          computedStyle.fill === "rgb(255, 255, 255)" ||
+          computedStyle.opacity === "0")
       ) {
+        // If the element is truly invisible, remove it
+        // EvaIcon creates invisible <rect> elements to reserve space and set padding
+        if (computedStyle.opacity === "0") {
+          elem.parentElement?.removeChild(elem);
+        }
         return false;
       }
 
