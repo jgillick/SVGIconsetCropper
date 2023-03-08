@@ -39,4 +39,20 @@ Now sit back and wait for the cropped SVG icons to fill the output directory.
 
 ## Make an icon font
 
-You can use [icomoon.io](https://icomoon.io/) to make an icon font from all of these SVGs. Follow [these instructions](https://www.reactnative.guide/12-svg-icons-using-react-native-vector-icons/12.1-creating-custom-iconset.html).
+If you want to make an icon font with these SVGs, it's important that all SVGs are normalized to the same height; otherwise, pixel perfect designs can be challenging. I've found that [Fantasticon](https://github.com/tancredi/fantasticon) works really well for this.
+
+For example, following along from our Material Design Icons example above (change `--font-types` to whatever font file format you need):
+
+```shell
+npm install -g fantasticon
+
+mkdir ./font
+fantasticon  --normalize \
+             --font-types ttf \
+             --asset-types json \
+             --name MaterialDesignIconsCropped \
+             --output ./font \
+             ./cropped
+```
+
+You can also use [icomoon.io](https://icomoon.io/), however, it will not automatically normalize all icons to the same height -- which can affect pixel perfect designs.. Follow [these instructions](https://www.reactnative.guide/12-svg-icons-using-react-native-vector-icons/12.1-creating-custom-iconset.html) for icomoon.
