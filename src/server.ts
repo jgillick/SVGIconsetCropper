@@ -80,7 +80,7 @@ export const runServer = async ({
 
   const app = express();
   app.use("/static", express.static(STATIC_DIR));
-  app.use(express.json());
+  app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true }));
 
   const welcomeTemplate = await template("index");
